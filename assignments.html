@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order Assignments - EV Logistics</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>EV Assignments</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>E-Vehicle #</th>
+                    <th>Orders Assigned</th>
+                    <th>Locations</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for vehicle, orders in assignments.items() %}
+                <tr>
+                    <td>{{ vehicle }}</td>
+                    <td>{{ orders.orders|length }}</td>
+                    <td>
+                        <ul>
+                            {% for order in orders.orders %}
+                            {{ order.name }} (Lat: {{ order.lat }}, Lon: {{ order.lon }})
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="/upload">Upload New CSV</a>
+    </div>
+</body>
+</html>
